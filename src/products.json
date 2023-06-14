@@ -1,0 +1,95 @@
+    {
+
+	"products" : [
+	{
+		"nombre": "Banco plano",
+		"description": "Banco plano",
+		"price": 10,
+		"thumbnail": "ruta/de/imagen.jpg",
+		"code": "ABC123",
+		"stock": 50,
+		"id": 1
+	},
+	{
+		"nombre": "Polea Alta",
+		"description": "Polea alta para espalda ",
+		"price": 6,
+		"thumbnail": "ruta/de/imagen.jpg",
+		"code": "ABC124",
+		"stock": 80,
+		"id": 2
+	},
+	{
+		"nombre": "Polea baja",
+		"description": "Mesa de jardin de acero ",
+		"price": 9,
+		"thumbnail": "ruta/de/imagen.jpg",
+		"code": "ABC125",
+		"stock": 40,
+		"id": 3
+	},
+	{
+		"nombre": "Remo con polea",
+		"description": "remo ",
+		"price": 7,
+		"thumbnail": "ruta/de/imagen.jpg",
+		"code": "ABC126",
+		"stock": 50,
+		"id": 4
+	},
+	{
+		"nombre": "Banco plano convergente ",
+		"description": "banco plano convergente ",
+		"price": 5,
+		"thumbnail": "ruta/de/imagen.jpg",
+		"code": "ABC127",
+		"stock": 50,
+		"id": 5
+	},
+	{
+		"nombre": "Banco inclinado convergente",
+		"description": "banco inclinado ",
+		"price": 5,
+		"thumbnail": "ruta/de/imagen.jpg",
+		"code": "ABC127",
+		"stock": 50,
+		"id": 6
+	},
+	{
+		"nombre": "Banco Declinado",
+		"description": "banco declinado ",
+		"price": 5,
+		"thumbnail": "ruta/de/imagen.jpg",
+		"code": "ABC127",
+		"stock": 50,
+		"id": 7
+	},
+	{
+		"nombre": "Prensa",
+		"description": "Prensa para piernas ",
+		"price": 5,
+		"thumbnail": "ruta/de/imagen.jpg",
+		"code": "ABC127",
+		"stock": 50,
+		"id": 8
+	},
+	{
+		"nombre": "Prensa hack",
+		"description": "Prensa hack ",
+		"price": 5,
+		"thumbnail": "ruta/de/imagen.jpg",
+		"code": "ABC127",
+		"stock": 50,
+		"id": 9
+	},{
+		"nombre": "Banco para cuadriceps",
+		"description": "banco cudriceps",
+		"price": 5,
+		"thumbnail": "ruta/de/imagen.jpg",
+		"code": "ABC127",
+		"stock": 50,
+		"id": 10
+	}
+	
+
+]}
