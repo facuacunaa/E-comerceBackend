@@ -1,23 +1,80 @@
+
 import express from "express";
-import ProductManager from "./ProductManager.js";
-
 const app = express();
-const pm = new ProductManager();
+const port = 8080;
+const host = "0.0.0.0";
 
-app.use(express.urlencoded({extended: true}));
+import __dirname from "./utils.js";
 
-app.get("/products/?", async (req, res) => {
-  const products = await pm.getProducts();
-  const limit = req.query.limit;
-  const newProducts = products.products.slice(0, limit);
-  res.send(newProducts);
+import productsRoute from "./Routes/products.router.js";
+import cartsRoute from "./Routes/carts.router.js";
+import viewsRoute from "./Routes/views.router.js";
+import messagesRoute from "./routes/messages.router.js";
+import cookiesRoute from "./routes/cookies.router.js";
+import sessionsRoute from "./routes/sessions.router.js";
+
+
+import mongoose from "mongoose";
+import { messageModel } from "./dao/mongo/models/messages.model.js";
+import { productModel } from "./dao/mongo/models/product.model.js";
+const enviroment = async () => {
+	await mongoose.connect("mongodb+srv://facuagustin17:JcrfABZfv7vzrkKE@e-commerce.vkqtlyj.mongodb.net/?retryWrites=true&w=majority");
+};
+enviroment();
+
+import handlebars from "express-handlebars";
+app.engine("handlebars", handlebars.engine());
+app.set("views", __dirname + "/views");
+app.set("view engine", "handlebars");
+app.use(express.static(__dirname + "/public"));
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use("/api/products", productsRoute);
+app.use("/api/carts", cartsRoute);
+app.use("/cookies", cookiesRoute);
+app.use("/sessions", sessionsRoute);
+app.use("/messages", messagesRoute);
+app.use("/", viewsRoute);
+
+import { Server } from "socket.io";
+const httpServer = app.listen(port, host, () => {
+	console.log(`Server up on http://${host}:${port}`);
 });
 
-app.get("/products/:id", async (req, res) => {
-  const productId = await pm.getProductById(req.params.id);
-  productId ? res.send(productId) : res.send({error: "not found"});
-});
+const io = new Server(httpServer);
 
-app.listen(8080, () => {
-  console.log("Servidor levantado");
+io.on("connection", async socket => {
+	console.log(`Client ${socket.id} connected`);
+
+	
+	const products = await productModel.find().lean();
+	io.emit("products", products);
+
+	productModel.watch().on("change", async change => {
+		const products = await productModel.find().lean();
+		io.emit("products", products);
+	});
+
+	
+	socket.on("user", async data => {
+		await messageModel.create({
+			user: data.user,
+			message: data.message,
+		});
+		const messagesDB = await messageModel.find();
+		io.emit("messagesDB", messagesDB);
+	});
+
+	socket.on("message", async data => {
+		await messageModel.create({
+			user: data.user,
+			message: data.message,
+		});
+		const messagesDB = await messageModel.find();
+		io.emit("messagesDB", messagesDB);
+	});
+	socket.on("disconnect", () => {
+		console.log(`Client ${socket.id} disconnected`);
+	});
 });

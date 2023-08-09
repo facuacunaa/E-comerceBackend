@@ -1,0 +1,29 @@
+<div class="products-container">
+	<h1 class="products-title">Products</h1>
+
+	<div class="products-list">
+			{{#each payload}}
+			<div class="products-item">
+				<p class="products-text">Producto: {{this.title}}</p>
+				<p class="products-text">Categoia: {{this.category}}</p>
+				<p class="products-text">Precio: ${{this.price}}</p>
+				<p class="products-text">Stock: {{this.stock}}</p>
+				<a href="./products/{{this._id}}" class="products-link-prodcut" >Vea el producto</a>
+				<a href="./api/carts/{{../cart}}/product/{{this._id}}" class="products-link-cart" target="_blank">Add to cart</a>
+			</div>
+			{{/each}}
+	</div>
+
+	<div class="paginate-container">
+	{{#if hasPrevPage}}
+		<a href="/products?query={{query}}&limit={{limit}}&page={{prevPage}}&sort={{sort}}"><button class="paginate-button">Anterior</button></a>
+	{{/if}}
+
+	<p class="paginate-current">{{page}}</p>
+
+	{{#if hasNextPage}}
+		<a href="/products?query={{query}}&limit={{limit}}&page={{nextPage}}&sort={{sort}}"><button class="paginate-button">Siguiente</button></a>
+	{{/if}}
+	</div>
+
+</div>
