@@ -1,10 +1,7 @@
-<div class="home-container">
-	<h1 class="home-title">Home</h1>
-
-	<ul class="home-list">
-		<li class="home-item"> <a href="./products">Productos</a></li>
-		<li class="home-item"> <a href="./realTimeProducts">Productos en tiempo real</a></li>
-		<li class="home-item"> <a href="./chat">Chat</a></li>
-		<li class="home-item"> <a href="./carts/">Carts (has to add the cart id)</a></li>
-	</ul>
+<div class='home-container'>
+	<form method='post' action='/api/sessions/logout'>
+		<p>Welcome <strong>{{user.email}}</strong></p>
+		<p>Your role is <strong>{{user.role}}</strong></p>
+		<input type='submit' value='Logout' class='home-button' />
+	</form>
 </div>
